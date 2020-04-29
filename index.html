@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat app</title>
+</head>
+<body>
+    <form>
+        <input name = "message"/>
+        <button>kirim</button>
+        <ul  id="pesan">
+    </form>
+        </ul>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+           // document.getElementsByTagName('form').sub
+            $(() => {
+                const socket = io ();
+                $('form').submit ((e) =>{
+                    const message = $('[name="message"]').val();
+                    event.preventDefault();
+                    socket.emit('chat message',$('[name="message"]').val());
+                    
+                    $('[name="message"]').val('')
+                })
+                socket.on('chat message', (message)=>{
+                    $('#pesan').append ($('<li>')
+                        .text (message))
+                })
+            })
+        </script>
+        <script> const socket = io(); </script>
+   
+</body>
+</html>
